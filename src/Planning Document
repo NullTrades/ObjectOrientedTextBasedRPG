@@ -1,0 +1,45 @@
+CSE3120 - Text-Based RPG
+Your task is to create a text-based RPG using classes, you may work in pairs if you like. An RPG (Role-Playing Game) is a game in which players assume the roles of characters in a fictional world. RPGs generally have a large degree of freedom, both in the characters available to be played and in the actions that they can take. Players interact with the world, making skill checks as the game progresses to determine if their actions succeed or fail.
+
+To create a text-based RPG game in Java, you will need to use the programming concepts of input/output, conditional statements, loops, arrays, functions/methods, and object-oriented principles (OOP; e.g., encapsulation, modularity, polymorphism, inheritance).  You will also be required to complete a UML Diagram for your game outlining your plan.
+Big Ideas
+What actions will the user take in the game and how will the program respond to them?
+How can we write reusable code by utilizing methods and objects effectively?
+Use of looping to repeat actions, such as combat or inventory management
+Utilize methods with different parameters to repeat behaviours, such as the encounter method that takes the name and hp of a character.
+How do things (i.e. Objects) relate? What information should be encapsulated in an object?
+
+When creating your RPG, focus on functionality rather than narrative. You need to create a modular system for the player to interact with. Focusing on the narrative will lead to you creating a choose-your-own-adventure that lacks the modular requirements.
+Understanding Comments
+	For this assignment, along with the usual comments, Javadocs, and IPO structure, each group member must create a comment demonstrating their understanding of a class that they wrote. The comment should include:
+The name of the group member
+What the class does
+Your choice to use any of the following:
+Encapsulation
+Modularity
+Composition
+Abstraction
+Polymorphism
+Inheritance
+Advanced algorithmic structures, such as try/catch block should be explained
+A flag/code used for debugging and the explanation of its purpose
+Supporting information
+Skill Checks
+A typical example of a skill could look like this. Aahan is playing a rogue, who has a +5 to his lock picking checks. He encounters a chest that is locked, and wants to attempt to open it. The difficulty of the chest is a 15. Aahan rolls a D20 (a twenty sided die) and adds his Lock-Picking skill to the check, if he rolls a 15 or greater he succeeds, otherwise it’s a failure. Aahan rolls a 12 + 5 = 17, so he succeeds!
+Additional Learning
+You could examine: Single Responsibility Principle (SRP), the Open-Closed Principle (OCP), or the Dependency Inversion Principle (DIP)
+Planning
+Include with your program a document describing your plan for the project. This plan should include:
+The scope of your project
+Your plan to Modularize the program
+A UML Class Diagram
+Requirements
+Coding requirements of the program. Like including data structures/etc.
+For each requirement listed below that is not included in the assignment, there will be a deduction of 5%.
+The program must follow IPO structure as much as possible.
+There must be a start screen (Starting Text)
+Use Modularization to organize the code into reusable objects
+Use Encapsulation to protect data
+Effective use of naming conventions for comments, subroutines, and variables
+Effective use of comments for organizations and explanation of code
+

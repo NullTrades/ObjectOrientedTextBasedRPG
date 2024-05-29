@@ -1,6 +1,16 @@
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Created a new project!");
+/*
 
+    Title: Main Class
+    Author: Osy Okocha
+    Date:
+
+*/
+
+public class Main {
+
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.startGame();
     }
+
 }
