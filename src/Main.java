@@ -1,8 +1,8 @@
 /*
 
     Title: Main Class
-    Author: Osy Okocha
-    Date:
+    Author: Osy Okocha and Simon Huang
+
 
 */
 

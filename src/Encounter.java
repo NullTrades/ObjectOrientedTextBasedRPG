@@ -1,10 +1,20 @@
 /*
 
     Title: Encounter Class
-    Author: Osy Okocha
-    Date: 
-    
+    Author: Osy Okocha and Simon Huang
+
 */
+
+
+/* Osy - Composition
+    This class manages the interactions between the user-driven character and the "pc" enemy in the RPG. It handles the
+    battle sequence, initiating the encounter (with dialogue), processing player actions (attacking or using items), and
+    managing enemy counterattacks. This class uses composition by incorporating instances of other classes.
+    - References to the Enemy object (e.g. - enemy.getHealth() )
+    - Interactions with the Character object (e.g. - character.attack(enemy) )
+    - Utilizing the GameTimer class to create pauses, simulating delays, and increasing the narrative feel of the RPG
+    These integrations allow the Encounter class to manage battle sequences effectively while maintaining modular code.
+ */
 
 import java.util.Scanner;
 
@@ -16,10 +26,13 @@ public class Encounter {
     }
 
     public void start(Character character) {
-        System.out.println("You have encountered " + enemy.getName());
+        GameTimer.wait(1);
+        System.out.println(" ");
+        System.out.println("You have encountered " + enemy.getName() + "!");
         System.out.println("You have " + character.getHealth() + " health.");
         System.out.println("The " + enemy.getName() + " has " + enemy.getHealth() + " health.");
-        Timer.wait(1); // call a 2 second "wait" from the Timer class
+        System.out.println(" ");
+        GameTimer.wait(1); // call a 2 second "wait" from the Timer class
 
     }
 
@@ -27,14 +40,21 @@ public class Encounter {
         // Simulate a simple battle system - character and enemy take turns attacking each other until one of them loses all health
         Scanner scanner = new Scanner(System.in);
         while (character.getHealth() > 0 && enemy.getHealth() > 0) {
-            System.out.println("Choose your action: \n1. Attack\n2. Use Item"); // Player Input
+            if (character.getInventory().isEmpty()) {
+                System.out.println("Choose your action: \n1. Attack"); // Player Input
+            } else {
+                System.out.println("Choose your action: \n1. Attack\n2. Use Item");}
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
                     character.attack(enemy);
-                    Timer.wait(1); // call a 1 second "wait" from the Timer class
-                    System.out.println(enemy.getName() + " now has " + enemy.getHealth() + " health remaining.");
-                    Timer.wait(1); // call a 1 second "wait" from the Timer class
+                    GameTimer.wait(1); // call a 1 second "wait" from the Timer class
+                    if(enemy.getHealth() > 0) {
+                        System.out.println(enemy.getName() + " now has " + enemy.getHealth() + " health remaining.");
+                    } else {
+                        break;}
+                    GameTimer.wait(1); // call a 1 second "wait" from the Timer class
+                    System.out.println(" ");
                     break;
                 case 2:
                     // Display inventory
@@ -44,6 +64,7 @@ public class Encounter {
                     }
                     System.out.println("Choose an item to use:");
                     int itemChoice = scanner.nextInt();
+                    System.out.println(" ");
                     character.useItem(itemChoice - 1);
                     break;
                 default:
@@ -54,18 +75,22 @@ public class Encounter {
             //Battle logic
             if (enemy.getHealth() <= 0) {
                 System.out.println("You have defeated the " + enemy.getName() + "!");
+                System.out.println(" ");
+                GameTimer.wait(1);
                 return true;
             }
 
             //Enemy's turn
             enemy.attack(character);
             if (character.getHealth() <= 0) {
+                GameTimer.wait(1);
                 System.out.println("You have been defeated by the " + enemy.getName() + "!");
                 return false;
             } else {
                 System.out.println("You now have " + character.getHealth() + " health remaining.");
+                System.out.println(" ");
             }
-            Timer.wait(1); // call a 1 second "wait" from the Timer class
+            GameTimer.wait(1); // call a 1 second "wait" from the Timer class
         }
         return false;
     }
@@ -74,11 +99,13 @@ public class Encounter {
         if (character.getHealth() > 0) {
             System.out.println("Congratulations! You have won the battle. " +
                     "\nYou have " + character.getHealth() + " health remaining.");
-            Timer.wait(2);
+            System.out.println(" ");
+            GameTimer.wait(2);
         } else {
+            GameTimer.wait(1);
             System.out.println("You have been defeated!");
         }
     }
 
 }
-// add timers everywhere
+// maybe add timers everywhere?

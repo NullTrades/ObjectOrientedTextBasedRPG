@@ -1,8 +1,8 @@
 /*
 
     Title: Character Interface
-    Author: Osy Okocha
-    Date: 
+    Author: Osy Okocha and Simon Huang
+
     
 */
 
@@ -16,16 +16,16 @@ public interface Character {
     void setHealth(int health);
 
     double getAttackMultiplier();
+
     void setAttackMultiplier(double attackMultiplier);
 
     double getPotionMultiplier();
 
     int getLuck();
+
     void setLuck(int luck);
 
     void attack(Enemy enemy);
-
-//    void useItem(Item item);
 
     boolean solvePuzzle(Puzzle puzzle);
 
@@ -33,5 +33,4 @@ public interface Character {
 
     List<Item> getInventory();
 
-    // ... additional methods and attributes
 }

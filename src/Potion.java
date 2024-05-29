@@ -1,8 +1,8 @@
 /*
 
-    Title:
-    Author: Osy Okocha
-    Date: 
+    Title: Potion Class
+    Author: Osy Okocha and Simon Huang
+
     
 */
 
@@ -20,6 +20,8 @@ public class Potion extends Item {
 
     @Override
     public void use(Character character) {
+        System.out.println(" ");
+        GameTimer.wait(1);
         if (healthBoost > 0) {
             character.setHealth(character.getHealth() + healthBoost);
             System.out.println(character.getName() + " drinks " + getName() + ", restoring " + healthBoost + " health.");

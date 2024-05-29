@@ -1,8 +1,8 @@
 /*
 
-    Title:
-    Author: Osy Okocha
-    Date: 
+    Title: Dice Utility Class
+    Author: Osy Okocha and Simon Huang
+
     
 */
 

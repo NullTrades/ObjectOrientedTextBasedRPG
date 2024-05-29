@@ -1,40 +1,48 @@
 /*
 
     Title: GameEngine Class
-    Author: Osy Okocha
-    Date: 
+    Author: Osy Okocha and Simon Huang
+
     
 */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Timer;
+import java.util.Timer; // potentially add timers to slow the game down
 
 public class Game {
     private Character currentPlayer;
     private List<Encounter> encounters;
     private int currentEncounterIndex;
-    // initialize scanner
-    private Scanner scanner = new Scanner(System.in);
+    // initializing scanner
+    private static Scanner scanner = new Scanner(System.in);
 
     public void startGame() {
         // Initialize game components and start the main game loop
         initializeEncounters();
         currentPlayer = chooseCharacter();
+        GameTimer.wait(1);
         currentEncounterIndex = 0;
         playNextEncounter();
     }
 
     public void endGame() {
-        // End the game and display the "results" based on player performance
+        // End the game and - maybe - display the "results" based on player performance
         System.out.println("Game Over! Better luck next time.");
     }
 
     public void initializeEncounters() {
-        // Define the sequence of encounters for your game
+        // Define the sequence of encounters for the game
         encounters = new ArrayList<>();
         // Add encounters to the list
-        encounters.add(new Encounter(new Enemy("Ogre", 100, 2))); // creating instances of enemies
+        encounters.add(new Encounter(new Enemy("Ogre", 100, 2)));
+        encounters.add(new Encounter(new Enemy("Goblin", 80, 1.5)));
+        encounters.add(new Encounter(new Enemy("Dragon", 150, 3)));
+        encounters.add(new Encounter(new Enemy("Troll", 120, 2.5)));
+        encounters.add(new Encounter(new Enemy("Vampire", 110, 2.2)));
+        // creating instances of enemies
+        //maybe one final boss?
     }
 
     public void playNextEncounter() {
@@ -48,28 +56,39 @@ public class Game {
                 if (currentEncounterIndex == encounters.size()) {
                     // Player has completed all encounters - game victory
                     System.out.println("Congratulations! You have completed the game!");
-                    // Handle game ending or victory conditions
+                } else {
+                    // Add a puzzle after defeating an enemy
+                    System.out.println(" ");
+                    System.out.println("You must solve a puzzle to proceed to the next level and restore your health.");
+                    GameTimer.wait(1);
+                    TimedAnagramPuzzle puzzle = new TimedAnagramPuzzle("mystery", 10);
+                    if (currentPlayer.solvePuzzle(puzzle)) {
+                        System.out.println("Puzzle solved! Your health is restored.");
+                        currentPlayer.setHealth(100);
+                    } else {
+                        System.out.println("Failed to solve the puzzle. You remain at your current health.");
+                    }
+                    playNextEncounter(); // move onto the next encounter after puzzle
                 }
             } else {
-                // Player lost the encounter - game over
-                System.out.println("Game Over! You have been defeated.");
-                // Handle game ending or failure conditions
+                GameTimer.wait(1);
+                endGame();
             }
         } else {
             // Player has completed all encounters - game victory
             System.out.println("Congratulations! You have completed the game!");
-            // Handle game ending or victory conditions
         }
     }
 
 
-
     private Character chooseCharacter() {
+
         // Display character selection menu and return the selected character
         System.out.println("Choose your character:");
         System.out.println("1. Warrior");
         System.out.println("2. Mage");
         System.out.println("3. Rogue");
+
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
@@ -85,6 +104,6 @@ public class Game {
                 System.out.println("Invalid choice. Please try again.");
                 return chooseCharacter();
         }
-    }
 
+    }
 }

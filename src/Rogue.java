@@ -1,10 +1,19 @@
 /*
 
     Title: Rogue Class
-    Author: Osy Okocha
-    Date: 
+    Author: Osy Okocha and Simon Huang
+
     
 */
+
+/* Simon - Inheritance
+    This class is an implementation of the "Character" interface. It initializes and declares various attributes such as health,
+    attack multiplier, luck, as well as an inventory of items. This class includes methods to use items, attack enemies, and solve puzzles.
+    Through implementing the Character interface, the Rogue class inherits the default attributes of the Character class like a template,
+    then adding the Rogue's unique attributes on top of the inherited values. Furthermore, this calss follows the IPO structure by taking
+    inputs (item index when using an item or enemy to attack), then processes these inputs through adjusting character attributes accordingly.
+    Finally, the output of this class are the updated attributes of the character and the enemy (health, damage dealt, damage received, etc.)
+ */
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +113,12 @@ public class Rogue implements Character {
     public boolean solvePuzzle(Puzzle puzzle) {
         // rogue puzzle solving logic
         // make rogue puzzle solving much easier and reliant on luck
-        System.out.println(name + " attempts to solve the puzzle...");
+        GameTimer.wait(1);
+        System.out.println("Rogue special abilities have taken effect.");
+        System.out.print("A die will be rolled to determine your fate.");
+        GameTimer.wait(1);
+        System.out.println(name + " rolls a 10 sided die...");
+        GameTimer.wait(1);
         return DiceUtility.rollDice(10) <= luck; // return true if dice roll is less than or equal to luck value
     }
 }

@@ -1,12 +1,12 @@
 /*
 
-    Title:
-    Author: Osy Okocha
-    Date: 
+    Title: GameTimer Class
+    Author: Osy Okocha and Simon Huang
+
     
 */
 
-public class Timer {
+public class GameTimer {
     // wait function that takes in a time in seconds and "pauses" the console for that period of time
     public static void wait(int seconds) {
         try {
