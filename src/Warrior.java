@@ -34,7 +34,6 @@ public class Warrior implements Character {
     public void useItem(int index) {
         if (index >= 0 && index < inventory.size()) {
             Item item = inventory.get(index);
-            System.out.println(name + " uses " + item.getName() + " with enhanced effects.");
             item.use(this);
             inventory.remove(index);
         } else {

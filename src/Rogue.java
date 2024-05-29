@@ -18,6 +18,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*  initializing private data that is specific to these classes. Initially with the aim of manipulating their values to
+    suit the need of distinguishing the "roles", while protecting the data from external manipulation - demonstrating
+    Encapsulation.
+ */
+
 public class Rogue implements Character {
     private List<Item> inventory;
     private String name;
@@ -47,7 +52,6 @@ public class Rogue implements Character {
     public void useItem(int index) {
         if (index >= 0 && index < inventory.size()) {
             Item item = inventory.get(index);
-            System.out.println(name + " uses " + item.getName());
             item.use(this);
             inventory.remove(index);
         } else {

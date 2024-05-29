@@ -9,7 +9,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Timer; // potentially add timers to slow the game down
 
 public class Game {
     private Character currentPlayer;
@@ -17,19 +16,34 @@ public class Game {
     private int currentEncounterIndex;
     // initializing scanner
     private static Scanner scanner = new Scanner(System.in);
+    String RESET = "\u001B[0m";
+    String RED = "\u001B[31m";
+    String GREEN = "\u001B[32m";
+    String YELLOW = "\u001B[33m";
 
     public void startGame() {
         // Initialize game components and start the main game loop
         initializeEncounters();
+        startScreen();
         currentPlayer = chooseCharacter();
         GameTimer.wait(1);
         currentEncounterIndex = 0;
         playNextEncounter();
     }
 
+    private void startScreen() {
+        System.out.println(YELLOW + "Welcome to the Land of Eldoria!");
+        GameTimer.wait(3);
+        System.out.println(YELLOW + "In this world, you are destined to face numerous challenges and emerge as a hero.");
+        GameTimer.wait(4);
+        System.out.println(YELLOW + "Choose your character and embark on an epic journey filled with battles, puzzles, and adventures." + RESET);
+        GameTimer.wait(5);
+        System.out.println(" ");
+    }
+
     public void endGame() {
         // End the game and - maybe - display the "results" based on player performance
-        System.out.println("Game Over! Better luck next time.");
+        System.out.println(RED + "Game Over! Better luck next time." + RESET);
     }
 
     public void initializeEncounters() {
@@ -55,18 +69,18 @@ public class Game {
                 currentEncounterIndex++; // Move to the next encounter
                 if (currentEncounterIndex == encounters.size()) {
                     // Player has completed all encounters - game victory
-                    System.out.println("Congratulations! You have completed the game!");
+                    System.out.println(GREEN + "Congratulations! You have completed the game!" + RESET);
                 } else {
                     // Add a puzzle after defeating an enemy
                     System.out.println(" ");
-                    System.out.println("You must solve a puzzle to proceed to the next level and restore your health.");
+                    System.out.println(YELLOW + "You must solve a puzzle to proceed to the next level and restore your health." + RESET);
                     GameTimer.wait(1);
                     TimedAnagramPuzzle puzzle = new TimedAnagramPuzzle("mystery", 10);
                     if (currentPlayer.solvePuzzle(puzzle)) {
-                        System.out.println("Puzzle solved! Your health is restored.");
+                        System.out.println(GREEN + "Puzzle solved!" +RESET + YELLOW + "Your health is restored." + RESET);
                         currentPlayer.setHealth(100);
                     } else {
-                        System.out.println("Failed to solve the puzzle. You remain at your current health.");
+                        System.out.println(RED + "Failed to solve the puzzle. You remain at your current health." + RESET);
                     }
                     playNextEncounter(); // move onto the next encounter after puzzle
                 }
@@ -76,7 +90,7 @@ public class Game {
             }
         } else {
             // Player has completed all encounters - game victory
-            System.out.println("Congratulations! You have completed the game!");
+            System.out.println(GREEN + "Congratulations! You have completed the game!" + RESET);
         }
     }
 
@@ -92,16 +106,16 @@ public class Game {
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
-                System.out.println("You have chosen the Warrior!");
+                System.out.println("You have chosen the " + YELLOW + "Warrior!");
                 return new Warrior("Warrior");
             case 2:
-                System.out.println("You have chosen the Mage!");
+                System.out.println("You have chosen the " + YELLOW + "Mage!");
                 return new Mage("Mage");
             case 3:
-                System.out.println("You have chosen the Rogue!");
+                System.out.println("You have chosen the " + YELLOW + "Rogue!");
                 return new Rogue("Rogue");
             default:
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println(RED + "Invalid choice. Please try again." + RESET);
                 return chooseCharacter();
         }
 

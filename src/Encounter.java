@@ -19,6 +19,11 @@
 import java.util.Scanner;
 
 public class Encounter {
+    String RESET = "\u001B[0m";
+    String RED = "\u001B[31m";
+    String GREEN = "\u001B[32m";
+    String YELLOW = "\u001B[33m";
+
     private Enemy enemy;
 
     public Encounter(Enemy enemy) {
@@ -28,7 +33,7 @@ public class Encounter {
     public void start(Character character) {
         GameTimer.wait(1);
         System.out.println(" ");
-        System.out.println("You have encountered " + enemy.getName() + "!");
+        System.out.println(YELLOW + "You have encountered " + enemy.getName() + "!" + RESET);
         System.out.println("You have " + character.getHealth() + " health.");
         System.out.println("The " + enemy.getName() + " has " + enemy.getHealth() + " health.");
         System.out.println(" ");
@@ -50,7 +55,7 @@ public class Encounter {
                     character.attack(enemy);
                     GameTimer.wait(1); // call a 1 second "wait" from the Timer class
                     if(enemy.getHealth() > 0) {
-                        System.out.println(enemy.getName() + " now has " + enemy.getHealth() + " health remaining.");
+                        System.out.println(enemy.getName() + " now has " + YELLOW + enemy.getHealth() + RESET + " health remaining.");
                     } else {
                         break;}
                     GameTimer.wait(1); // call a 1 second "wait" from the Timer class
@@ -74,7 +79,7 @@ public class Encounter {
 
             //Battle logic
             if (enemy.getHealth() <= 0) {
-                System.out.println("You have defeated the " + enemy.getName() + "!");
+                System.out.println(YELLOW + "You have defeated the " + enemy.getName() + "!" + RESET);
                 System.out.println(" ");
                 GameTimer.wait(1);
                 return true;
@@ -84,10 +89,10 @@ public class Encounter {
             enemy.attack(character);
             if (character.getHealth() <= 0) {
                 GameTimer.wait(1);
-                System.out.println("You have been defeated by the " + enemy.getName() + "!");
+                System.out.println(RED + "You have been defeated by the " + enemy.getName() + "!" + RESET);
                 return false;
             } else {
-                System.out.println("You now have " + character.getHealth() + " health remaining.");
+                System.out.println("You now have " + GREEN + character.getHealth() + RESET + " health remaining.");
                 System.out.println(" ");
             }
             GameTimer.wait(1); // call a 1 second "wait" from the Timer class
@@ -97,13 +102,13 @@ public class Encounter {
 
     public void end(Character character) {
         if (character.getHealth() > 0) {
-            System.out.println("Congratulations! You have won the battle. " +
-                    "\nYou have " + character.getHealth() + " health remaining.");
+            System.out.println(GREEN + "Congratulations! You have won the battle. " +
+                    "\nYou have " + character.getHealth() + " health remaining." + RESET);
             System.out.println(" ");
             GameTimer.wait(2);
         } else {
             GameTimer.wait(1);
-            System.out.println("You have been defeated!");
+            System.out.println(RED + "You have been defeated!" + RESET);
         }
     }
 
